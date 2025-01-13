@@ -1,6 +1,6 @@
 class MeetingPolicy < ApplicationPolicy
   class Scope < Scope
-    # NOTE: Be explicit about which records you allow access to!
+    # This method defines which records the user is allowed to see.
     def resolve
       scope.all
     end
