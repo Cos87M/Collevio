@@ -3,7 +3,10 @@ import Chart from 'chart.js/auto';
 
 // Connects to data-controller="activities"
 export default class extends Controller {
+  // Define targets for HTML elements where charts will be rendered
   static targets = ["nap", "food", "bowel", "mood"]
+  // Define values that will be passed from the HTML to the controller
+  // These hold the data for the charts (naps, foods, bowels, moods, and corresponding dates)
   static values = {
     naps: Array,
     foods: Array,
@@ -11,70 +14,44 @@ export default class extends Controller {
     moods: Array,
     dates: Array,
   }
-
+  // Called when the controller is connected to the DOM
   connect() {
-    // Chart.defaults.backgroundColor = '#FF0099';
-    // Chart.defaults.borderColor = '#36A2EB';
-    // Chart.defaults.color = '#000';
-    // console.log(this.datesValue)
-
-    // var today = new Date();
-
-    // const yesterday = new Date(today)
-    // yesterday.setDate(yesterday.getDate() - 1)
-
-    // const dayBefore = new Date(today)
-    // dayBefore.setDate(yesterday.getDate() - 2)
-
-    // const twoDaysBefore = new Date(today)
-    // twoDaysBefore.setDate(yesterday.getDate() - 3)
-
-    // const threeDaysBefore = new Date(today)
-    // threeDaysBefore.setDate(yesterday.getDate() - 4)
-
-    // today.toDateString()
-    // yesterday.toDateString()
-    // dayBefore.toDateString()
-    // twoDaysBefore.toDateString()
-    // console.log(threeDaysBefore.toDateString('en-US', options))
-    // const options = { weekday: 'long' }
-
-    // [`${threeDaysBefore.toDateString('en-US', options)}`, `${twoDaysBefore.toDateString('en-US', options)}`, `${dayBefore.toDateString('en-US', options)}`, `${yesterday.toDateString('en-US', options)}`, `${today.toDateString('en-US', options)}`],
-
+     // Create a line chart for nap times
     new Chart(this.napTarget, {
-      type: 'line',
+      type: 'line',  // Line chart to visualize nap durations
       data: {
-        labels: this.datesValue,
+        labels: this.datesValue,   // X-axis labels (dates)
         datasets: [{
-          label: 'nap time (minutes)',
-          data: this.napsValue,
-          borderWidth: 3,
+          label: 'nap time (minutes)',   // Label for the dataset
+          data: this.napsValue,   // Y-axis data (nap durations)
+          borderWidth: 3,     // Line thickness
           borderColor: 'black',
           backgroundColor: '#FBCA1F',
           color: 'black',
         }]
       },
       options: {
-        responsive: true,
-        maintainAspectRatio: false,
+        responsive: true,   // Make the chart responsive to container size
+        maintainAspectRatio: false,   // Allow flexible aspect ratio for better layout
         plugins: {
           legend: {
-            display: false
+            display: false      // Hide the chart legend
           },
           tooltips: {
-            enabled: false
+            enabled: false    // Disable tooltips (popups when hovering over data points)
           },
         },
       },
       })
-
+      
+      // Create a bar chart for bowel movement data
       new Chart(this.bowelTarget, {
-        type: 'bar',
+        type: 'bar',    // Bar chart to visualize bowel movement data
         data: {
-          labels: this.datesValue,
+          labels: this.datesValue,    // X-axis labels (dates)
           datasets: [{
-            label: 'bowel',
-            data: this.bowelsValue,
+            label: 'bowel',   // Label for the dataset
+            data: this.bowelsValue,  //Y-axis data (bowel movements)
             borderWidth: 3,
             borderColor: 'black',
             backgroundColor: '#FBCA1F',
@@ -82,17 +59,17 @@ export default class extends Controller {
           }]
         },
         options: {
-          responsive: true,
-          maintainAspectRatio: false,
+          responsive: true,   //Make the chart responsive to container size
+          maintainAspectRatio: false,   // Allow flexible aspect ratio for better layaout
           plugins: {
             legend: {
-               display: false,
+               display: false,    //Hide the chart legend
             }
           },
           scales: {
             y: {
                 ticks: {
-                    stepSize: 1
+                    stepSize: 1   // Set the step size for  Y-axis thickness
                 }
             }
           }
